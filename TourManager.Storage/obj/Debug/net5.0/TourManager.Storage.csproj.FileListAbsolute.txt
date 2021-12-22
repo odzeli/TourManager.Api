@@ -1,0 +1,11 @@
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\bin\Debug\net5.0\TourManager.Storage.deps.json
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\bin\Debug\net5.0\TourManager.Storage.dll
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\bin\Debug\net5.0\ref\TourManager.Storage.dll
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\bin\Debug\net5.0\TourManager.Storage.pdb
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.AssemblyInfoInputs.cache
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.AssemblyInfo.cs
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.csproj.CoreCompileInputs.cache
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.dll
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\ref\TourManager.Storage.dll
+C:\Personal space\test projects\TourManager.Api\TourManager.Storage\obj\Debug\net5.0\TourManager.Storage.pdb
