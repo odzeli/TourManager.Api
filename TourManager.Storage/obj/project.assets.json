@@ -5699,11 +5699,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
+      "projectUniqueName": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
       "projectName": "TourManager.Storage",
-      "projectPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
+      "projectPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
       "packagesPath": "C:\\Users\\archil.odzeli\\.nuget\\packages\\",
-      "outputPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\obj\\",
+      "outputPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5771,7 +5771,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

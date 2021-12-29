@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TourManager.Auth.Common;
 using TourManager.Domain;
 using TourManager.Storage;
 
@@ -42,6 +44,26 @@ namespace TourManager.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDbContext<TourManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false; // should be true on the production
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authOptions.Issuer,
+
+                        ValidateAudience = true,
+                        ValidAudience = authOptions.Audience,
+
+                        ValidateLifetime = true,
+
+                        IssuerSigningKey = authOptions.GetSymmetricSecurityKey(), // HS256
+                        ValidateIssuerSigningKey = true
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -65,6 +87,7 @@ namespace TourManager.Api
 
             app.UseCors(specificOrigins);
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

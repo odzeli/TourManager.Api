@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace TourManager.Domain.Logic
     {
 
         public TourManager(TourManagerDbContext dbContext)
-            :base(dbContext)
+            : base(dbContext)
         {
 
         }
@@ -32,9 +33,30 @@ namespace TourManager.Domain.Logic
 
         public async Task<List<Tour>> AllTours()
         {
-           var tours = await dbContext.Set<TourDb>()
-                .Select(t => new Tour { Drivers = t.Drivers, Guides = t.Guides, Id = t.Id, StartDate = t.StartDate }).ToListAsync();
+            var tours = await dbContext.Set<TourDb>()
+                 .Select(t => new Tour
+                 {
+                     Drivers = t.Drivers,
+                     Guides = t.Guides,
+                     Id = t.Id,
+                     StartDate = t.StartDate
+                 }).ToListAsync();
+
+            tours.ForEach(tour =>
+            {
+                var tourists = dbContext.Set<Storage.Models.Tourist>().Where(t => t.TourId == tour.Id).ToList();
+                if (tourists.Count() > 0)
+                    tour.EndDate = tourists.Max(t => t.CheckOutDate);
+
+                tour.TouristNumber = dbContext.Set<Storage.Models.Tourist>().Where(t => t.TourId == tour.Id).Count();
+            });
             return tours;
+        }
+
+        public async Task<DateTime> GetTourStartDate(Guid tourId)
+        {
+            var tourStartDate = await dbContext.Set<TourDb>().Where(t => t.Id == tourId).Select(t => t.StartDate).SingleOrDefaultAsync();
+            return tourStartDate;
         }
     }
 }

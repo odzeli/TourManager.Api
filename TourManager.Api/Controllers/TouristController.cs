@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Models;
@@ -7,6 +9,7 @@ using TourManager.Domain.Models.Abstract;
 
 namespace TourManager.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TouristController : ControllerBase
@@ -45,6 +48,15 @@ namespace TourManager.Api.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [Route("TouristsList/{tourId}")]
+        [HttpGet]
+        public async Task<IEnumerable<Tourist>> TouristsList(Guid tourId)
+        {
+            var tourists = await touristManager.TouristsList(tourId);
+
+            return tourists;
         }
     }
 }

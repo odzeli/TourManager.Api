@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,13 +19,14 @@ namespace TourManager.Domain.Logic
         {
 
         }
-        public ITourist Get(Guid id)
+        public async Task<ITourist> Get(Guid id)
         {
-            var touristStorage = dbContext.Set<Storage.Models.Tourist>().Where(t => t.Id == id).SingleOrDefault();
+            var touristStorage = await dbContext.Set<Storage.Models.Tourist>().Where(t => t.Id == id).SingleOrDefaultAsync();
 
             var tourist = new Tourist()
             {
                 Name = touristStorage.Name,
+                TourId = touristStorage.TourId,
                 Birthday = touristStorage.Birthday,
                 PassportNumber = touristStorage.PassportNumber,
                 ArrivalDateAndTime = touristStorage.ArrivalDateAndTime,
@@ -69,10 +71,40 @@ namespace TourManager.Domain.Logic
             dbContext.Add(touristStorage);
             return await dbContext.SaveChangesAsync();
         }
-        public void SetMany(List<Tourist> tourists)
+
+        public async Task<IEnumerable<Tourist>> TouristsList(Guid tourId)
         {
-            throw new NotImplementedException();
+            var touristsStorage = await dbContext.Set<Storage.Models.Tourist>().Where(t => t.TourId == tourId).ToListAsync();
+            var tourists = new List<Tourist>();
+
+            touristsStorage.ForEach(touristStorage =>
+            {
+                var tourist = new Tourist()
+                {
+                    Name = touristStorage.Name,
+                    TourId = touristStorage.TourId,
+                    Birthday = touristStorage.Birthday,
+                    PassportNumber = touristStorage.PassportNumber,
+                    ArrivalDateAndTime = touristStorage.ArrivalDateAndTime,
+                    ArrivalTransportType = touristStorage.ArrivalTransportType,
+                    DepartureDateAndTime = touristStorage.DepartureDateAndTime,
+                    DepartureTransportType = touristStorage.DepartureTransportType,
+                    TourDays = touristStorage.TourDays,
+                    HotelNights = touristStorage.HotelNights,
+                    Stars = touristStorage.Stars,
+                    ApartmentType = touristStorage.ApartmentType,
+                    PhoneNumber = touristStorage.PhoneNumber,
+                    Hotel = touristStorage.Hotel,
+                    ClosePrice = touristStorage.ClosePrice,
+                    Addition = touristStorage.Addition,
+                    Comment = touristStorage.Comment
+                };
+                tourists.Add(tourist);
+            });
+
+            return tourists;
         }
+
         public void Delete(Guid id)
         {
             throw new NotImplementedException();

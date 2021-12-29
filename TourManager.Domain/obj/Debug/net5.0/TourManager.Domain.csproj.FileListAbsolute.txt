@@ -13,3 +13,18 @@ C:\Personal space\test projects\TourManager.Api\TourManager.Domain\obj\Debug\net
 C:\Personal space\test projects\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.dll
 C:\Personal space\test projects\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\ref\TourManager.Domain.dll
 C:\Personal space\test projects\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.pdb
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\TourManager.Domain.deps.json
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\TourManager.Domain.dll
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\ref\TourManager.Domain.dll
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\TourManager.Domain.pdb
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\TourManager.Storage.dll
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\bin\Debug\net5.0\TourManager.Storage.pdb
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.csproj.AssemblyReference.cache
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.AssemblyInfoInputs.cache
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.AssemblyInfo.cs
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.csproj.CoreCompileInputs.cache
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.csproj.CopyComplete
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.dll
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\ref\TourManager.Domain.dll
+C:\Personal space\Git\TourManager.Api\TourManager.Domain\obj\Debug\net5.0\TourManager.Domain.pdb

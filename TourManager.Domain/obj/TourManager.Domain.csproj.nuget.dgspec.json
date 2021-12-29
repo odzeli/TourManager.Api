@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj": {}
+    "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj": {
+    "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj",
+        "projectUniqueName": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj",
         "projectName": "TourManager.Domain",
-        "projectPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj",
+        "projectPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Domain\\TourManager.Domain.csproj",
         "packagesPath": "C:\\Users\\archil.odzeli\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Domain\\obj\\",
+        "outputPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -31,8 +31,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj": {
-                "projectPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj"
+              "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj": {
+                "projectPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj"
               }
             }
           }
@@ -61,18 +61,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj": {
+    "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
+        "projectUniqueName": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
         "projectName": "TourManager.Storage",
-        "projectPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
+        "projectPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
         "packagesPath": "C:\\Users\\archil.odzeli\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\obj\\",
+        "outputPath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -140,7 +140,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

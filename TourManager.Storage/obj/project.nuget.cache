@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZPi4Abs1fJB5Cw/ioSYICI/TReglOdk28LbT9Jj564OLFjjIRTqUC3808ykK9mFhHY3YGq/vHtHlcCaVHvRSgQ==",
+  "dgSpecHash": "XeyLF8qXUi7H5yak/NZb+xTfwFSChF+1e+/B+IIkkp1q4T+wrLUdTmKlejupsVyH52prGiFuH/TueJAtlqxvvw==",
   "success": true,
-  "projectFilePath": "C:\\Personal space\\test projects\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
+  "projectFilePath": "C:\\Personal space\\Git\\TourManager.Api\\TourManager.Storage\\TourManager.Storage.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\archil.odzeli\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
