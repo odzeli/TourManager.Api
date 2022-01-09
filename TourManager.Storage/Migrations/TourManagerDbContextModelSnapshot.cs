@@ -59,6 +59,9 @@ namespace TourManager.Storage.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ColumnId");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DefaultAccess")
                         .HasColumnType("int");
 
@@ -92,6 +95,9 @@ namespace TourManager.Storage.Migrations
                         .HasColumnName("StandardColumnId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DefaultAccess")
                         .HasColumnType("int");
 
@@ -115,6 +121,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 1,
+                            Code = "name",
                             DefaultAccess = 0,
                             Name = "Имя",
                             Options = 2,
@@ -124,6 +131,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 2,
+                            Code = "startDate",
                             DefaultAccess = 0,
                             Name = "Начало тура",
                             Options = 2,
@@ -133,6 +141,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 3,
+                            Code = "endDate",
                             DefaultAccess = 0,
                             Name = "Конец тура",
                             Options = 2,
@@ -142,6 +151,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 4,
+                            Code = "daysNumber",
                             DefaultAccess = 0,
                             Name = "Дней в туре",
                             Options = 2,
@@ -151,6 +161,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 5,
+                            Code = "nightsInHotel",
                             DefaultAccess = 0,
                             Name = "Ночей в отеле",
                             Options = 2,
@@ -160,6 +171,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 6,
+                            Code = "tourStars",
                             DefaultAccess = 0,
                             Name = "Категория тура",
                             Options = 2,
@@ -169,6 +181,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 7,
+                            Code = "roomType",
                             DefaultAccess = 0,
                             Name = "Тип номера",
                             Options = 2,
@@ -178,6 +191,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 8,
+                            Code = "phone",
                             DefaultAccess = 0,
                             Name = "Номер телефона",
                             Options = 2,
@@ -187,6 +201,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 9,
+                            Code = "hotel",
                             DefaultAccess = 0,
                             Name = "Отель",
                             Options = 2,
@@ -196,6 +211,7 @@ namespace TourManager.Storage.Migrations
                         new
                         {
                             Id = 10,
+                            Code = "closedPrice",
                             DefaultAccess = 0,
                             Name = "Закрытая цена",
                             Options = 2,

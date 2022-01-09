@@ -10,6 +10,7 @@ namespace TourManager.Domain
         {
             services.AddScoped<ITouristManager, TouristManager>();
             services.AddScoped<ITourManager, Logic.TourManager>();
+            services.AddScoped<IColumnManager, ColumnManager>();
         }
     }
 }

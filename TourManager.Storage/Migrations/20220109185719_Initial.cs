@@ -14,6 +14,7 @@ namespace TourManager.Storage.Migrations
                     StandardColumnId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ValueType = table.Column<int>(type: "int", nullable: false),
                     DefaultAccess = table.Column<int>(type: "int", nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
@@ -44,6 +45,7 @@ namespace TourManager.Storage.Migrations
                 {
                     ColumnId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TourId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ValueType = table.Column<int>(type: "int", nullable: false),
                     DefaultAccess = table.Column<int>(type: "int", nullable: false),
@@ -111,19 +113,19 @@ namespace TourManager.Storage.Migrations
 
             migrationBuilder.InsertData(
                 table: "StandardColumn",
-                columns: new[] { "StandardColumnId", "DefaultAccess", "Name", "Options", "SortOrder", "ValueType" },
+                columns: new[] { "StandardColumnId", "Code", "DefaultAccess", "Name", "Options", "SortOrder", "ValueType" },
                 values: new object[,]
                 {
-                    { 1, 0, "Имя", 2, 0, 2 },
-                    { 2, 0, "Начало тура", 2, 1, 4 },
-                    { 3, 0, "Конец тура", 2, 3, 4 },
-                    { 4, 0, "Дней в туре", 2, 4, 1 },
-                    { 5, 0, "Ночей в отеле", 2, 5, 1 },
-                    { 6, 0, "Категория тура", 2, 6, 1 },
-                    { 7, 0, "Тип номера", 2, 7, 2 },
-                    { 8, 0, "Номер телефона", 2, 8, 2 },
-                    { 9, 0, "Отель", 2, 9, 2 },
-                    { 10, 0, "Закрытая цена", 2, 10, 3 }
+                    { 1, "name", 0, "Имя", 2, 0, 2 },
+                    { 2, "startDate", 0, "Начало тура", 2, 1, 4 },
+                    { 3, "endDate", 0, "Конец тура", 2, 3, 4 },
+                    { 4, "daysNumber", 0, "Дней в туре", 2, 4, 1 },
+                    { 5, "nightsInHotel", 0, "Ночей в отеле", 2, 5, 1 },
+                    { 6, "tourStars", 0, "Категория тура", 2, 6, 1 },
+                    { 7, "roomType", 0, "Тип номера", 2, 7, 2 },
+                    { 8, "phone", 0, "Номер телефона", 2, 8, 2 },
+                    { 9, "hotel", 0, "Отель", 2, 9, 2 },
+                    { 10, "closedPrice", 0, "Закрытая цена", 2, 10, 3 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -10,5 +10,6 @@ namespace TourManager.Domain.Models
         public string Drivers { get; set; }
         public int TouristNumber { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IncludeStandardColums { get; set; }
     }
 }

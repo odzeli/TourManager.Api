@@ -1,7 +1,7 @@
 ﻿using System;
 using TourManager.Storage.Enums;
 
-namespace TourManager.Storage.Models
+namespace TourManager.Domain.Models
 {
     public class Column
     {
@@ -10,8 +10,8 @@ namespace TourManager.Storage.Models
         public string Code { get; set; }
         public Guid TourId { get; set; }
         public ColumnValueType ValueType { get; set; }
-        public DefaultAccess DefaultAccess { get; set; }    
-        public int SortOrder { get; set; }  
-        public ColumnOptions Options { get; set; }
+        public int SortOrder { get; set; }
+        public bool DisplayInGrid { get; set; }
+        public bool DisplayInPersonalPanel { get; set; }
     }
 }
