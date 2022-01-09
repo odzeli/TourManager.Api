@@ -20,7 +20,7 @@ namespace TourManager.Domain.Models
         public int TourDays { get; set; }
         public int HotelNights { get; set; }
         public int Stars { get; set; }
-        public ApartmentType ApartmentType { get; set; }
+        public Storage.Enums.ColumnValueType ApartmentType { get; set; }
         public string PhoneNumber { get; set; }
         public string Hotel { get; set; }
         public decimal ClosePrice { get; set; }

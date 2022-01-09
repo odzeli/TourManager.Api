@@ -46,7 +46,7 @@ namespace TourManager.Domain.Logic
             {
                 var tourists = dbContext.Set<Storage.Models.Tourist>().Where(t => t.TourId == tour.Id).ToList();
                 if (tourists.Count() > 0)
-                    tour.EndDate = tourists.Max(t => t.CheckOutDate);
+                    //tour.EndDate = tourists.Max(t => t.CheckOutDate);
 
                 tour.TouristNumber = dbContext.Set<Storage.Models.Tourist>().Where(t => t.TourId == tour.Id).Count();
             });

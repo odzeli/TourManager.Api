@@ -27,21 +27,6 @@ namespace TourManager.Domain.Logic
             {
                 Name = touristStorage.Name,
                 TourId = touristStorage.TourId,
-                Birthday = touristStorage.Birthday,
-                PassportNumber = touristStorage.PassportNumber,
-                ArrivalDateAndTime = touristStorage.ArrivalDateAndTime,
-                ArrivalTransportType = touristStorage.ArrivalTransportType,
-                DepartureDateAndTime = touristStorage.DepartureDateAndTime,
-                DepartureTransportType = touristStorage.DepartureTransportType,
-                TourDays = touristStorage.TourDays,
-                HotelNights = touristStorage.HotelNights,
-                Stars = touristStorage.Stars,
-                ApartmentType = touristStorage.ApartmentType,
-                PhoneNumber = touristStorage.PhoneNumber,
-                Hotel = touristStorage.Hotel,
-                ClosePrice = touristStorage.ClosePrice,
-                Addition = touristStorage.Addition,
-                Comment = touristStorage.Comment
             };
             return tourist;
         }
@@ -51,22 +36,7 @@ namespace TourManager.Domain.Logic
             var touristStorage = new Storage.Models.Tourist()
             {
                 TourId = tourist.TourId,
-                Name = tourist.Name,
-                Birthday = tourist.Birthday,
-                PassportNumber = tourist.PassportNumber,
-                ArrivalDateAndTime = tourist.ArrivalDateAndTime,
-                ArrivalTransportType = tourist.ArrivalTransportType,
-                DepartureDateAndTime = tourist.DepartureDateAndTime,
-                DepartureTransportType = tourist.DepartureTransportType,
-                TourDays = tourist.TourDays,
-                HotelNights = tourist.HotelNights,
-                Stars = tourist.Stars,
-                ApartmentType = tourist.ApartmentType,
-                PhoneNumber = tourist.PhoneNumber,
-                Hotel = tourist.Hotel,
-                ClosePrice = tourist.ClosePrice,
-                Addition = tourist.Addition,
-                Comment = tourist.Comment
+                Name = tourist.Name
             };
             dbContext.Add(touristStorage);
             return await dbContext.SaveChangesAsync();
@@ -82,22 +52,7 @@ namespace TourManager.Domain.Logic
                 var tourist = new Tourist()
                 {
                     Name = touristStorage.Name,
-                    TourId = touristStorage.TourId,
-                    Birthday = touristStorage.Birthday,
-                    PassportNumber = touristStorage.PassportNumber,
-                    ArrivalDateAndTime = touristStorage.ArrivalDateAndTime,
-                    ArrivalTransportType = touristStorage.ArrivalTransportType,
-                    DepartureDateAndTime = touristStorage.DepartureDateAndTime,
-                    DepartureTransportType = touristStorage.DepartureTransportType,
-                    TourDays = touristStorage.TourDays,
-                    HotelNights = touristStorage.HotelNights,
-                    Stars = touristStorage.Stars,
-                    ApartmentType = touristStorage.ApartmentType,
-                    PhoneNumber = touristStorage.PhoneNumber,
-                    Hotel = touristStorage.Hotel,
-                    ClosePrice = touristStorage.ClosePrice,
-                    Addition = touristStorage.Addition,
-                    Comment = touristStorage.Comment
+                    TourId = touristStorage.TourId
                 };
                 tourists.Add(tourist);
             });
