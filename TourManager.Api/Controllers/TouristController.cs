@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Models;
+using TourManager.Domain.Models.AboutColumn;
+using TourManager.Domain.Models.AboutTourist;
 using TourManager.Domain.Models.Abstract;
 
 namespace TourManager.Api.Controllers
@@ -37,9 +39,9 @@ namespace TourManager.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> SetTourist([FromBody]Tourist tourist)
+        public async Task<ActionResult> AddTourist([FromBody]TouristValues touristValues)
         {
-            var saveChangesResult = await touristManager.Set(tourist);
+            var saveChangesResult = await touristManager.Add(touristValues);
             if (saveChangesResult > 0)
             {
                 return Ok();
@@ -50,13 +52,14 @@ namespace TourManager.Api.Controllers
             }
         }
 
-        [Route("TouristsList/{tourId}")]
+        [Route("{tourId}/TouristRows")]
         [HttpGet]
-        public async Task<IEnumerable<Tourist>> TouristsList(Guid tourId)
+        public async Task<IEnumerable<Row>> TouristsList(Guid tourId)
         {
-            var tourists = await touristManager.TouristsList(tourId);
+            var touristRows = await touristManager.RowList(tourId);
 
-            return tourists;
+            return touristRows;
         }
+
     }
 }

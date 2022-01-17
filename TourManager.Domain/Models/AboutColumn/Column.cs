@@ -1,7 +1,7 @@
 ﻿using System;
 using TourManager.Storage.Enums;
 
-namespace TourManager.Domain.Models
+namespace TourManager.Domain.Models.AboutColumn
 {
     public class Column
     {

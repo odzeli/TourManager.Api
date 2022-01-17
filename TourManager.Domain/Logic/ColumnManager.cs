@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
 using TourManager.Storage;
 using TourManager.Storage.Models;
+using ColumnDb = TourManager.Storage.Models.Column;
+
 
 namespace TourManager.Domain.Logic
 {
@@ -37,6 +39,12 @@ namespace TourManager.Domain.Logic
 
             var saved = await dbContext.SaveChangesAsync();
             return saved;
+        }
+
+        public async Task<IEnumerable<string>> GetColumnsCode(Guid tourId)
+        {
+            var columns = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).Select(c => c.Code).ToListAsync();
+            return columns;
         }
     }
 }

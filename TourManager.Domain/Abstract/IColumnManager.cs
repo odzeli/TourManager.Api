@@ -10,5 +10,6 @@ namespace TourManager.Domain.Abstract
     public interface IColumnManager
     {
         public Task<int> IncludeStandardColumnsToTour(Guid tourId);
+        public Task<IEnumerable<string>> GetColumnsCode(Guid tourId);
     }
 }

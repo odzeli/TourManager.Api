@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TourManager.Storage.Models
+namespace TourManager.Domain.Models.AboutColumn
 {
     public class Cell
     {
@@ -12,5 +12,11 @@ namespace TourManager.Storage.Models
         public DateTime? DateTimeValue { get; set; }
         public bool? BoolValue { get; set; }
         public Guid? GuidValue { get; set; }
+
+        public Cell(Guid touristId, Guid columnId)
+        {
+            TouristId = touristId;
+            ColumnId = columnId;
+        }
     }
 }

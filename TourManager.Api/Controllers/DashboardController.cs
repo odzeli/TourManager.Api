@@ -8,7 +8,7 @@ using TourManager.Domain.Models;
 namespace TourManager.Api.Controllers
 {
     [Authorize]
-    [Route("api/Dashboard/")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class DashboardController : ControllerBase
     {
