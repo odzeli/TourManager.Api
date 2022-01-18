@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
+using TourManager.Domain.Models.AboutColumn;
 
 namespace TourManager.Api.Controllers
 {
@@ -19,7 +20,7 @@ namespace TourManager.Api.Controllers
         }
 
         [HttpGet, Route("tour/{tourId}/columnsCode")]
-        public async Task<IEnumerable<string>> GetColumnCode(Guid tourId)
+        public async Task<SplittedColumns> GetColumnCode(Guid tourId)
         {
             return await columnManager.GetColumnsCode(tourId);
         }

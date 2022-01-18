@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
+using TourManager.Domain.Models.AboutColumn;
 using TourManager.Storage;
 using TourManager.Storage.Models;
 using ColumnDb = TourManager.Storage.Models.Column;
@@ -25,7 +26,7 @@ namespace TourManager.Domain.Logic
             var standardColumns = await dbContext.Set<StandardColumn>().ToListAsync();
             standardColumns.ForEach(c =>
             {
-                dbContext.Set<Column>().Add(new Column
+                dbContext.Set<ColumnDb>().Add(new ColumnDb
                 {
                     Name = c.Name,
                     Code = c.Code,
@@ -41,10 +42,13 @@ namespace TourManager.Domain.Logic
             return saved;
         }
 
-        public async Task<IEnumerable<string>> GetColumnsCode(Guid tourId)
+        public async Task<SplittedColumns> GetColumnsCode(Guid tourId)
         {
-            var columns = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).Select(c => c.Code).ToListAsync();
-            return columns;
+            var columnsFromDb = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).ToListAsync();
+            var splittedColumns = new SplittedColumnsSetter(columnsFromDb);
+            splittedColumns.SplitColumns();
+
+            return splittedColumns;
         }
     }
 }

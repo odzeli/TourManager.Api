@@ -13,6 +13,7 @@ namespace TourManager.Domain.Abstract
         public Task<ITourist> Get(Guid id);
         public Task<int> Add(TouristValues touristValues);
         public Task<IEnumerable<Row>> RowList(Guid tourId);
+        public Task<int> Update(Guid tourId, Guid touristId, string columnCode, IValue value);
         public void Delete(Guid id);
     }
 }

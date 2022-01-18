@@ -14,6 +14,7 @@ using Tourist = TourManager.Domain.Models.AboutTourist.Tourist;
 using TourManager.Domain.Models.AboutColumn;
 using ColumnDb = TourManager.Storage.Models.Column;
 using TouristDb = TourManager.Storage.Models.Tourist;
+using System.Data;
 
 namespace TourManager.Domain.Logic
 {
@@ -92,6 +93,56 @@ namespace TourManager.Domain.Logic
             var rows = rowProvider.GenerateRows(cells, columnIdToColumnMap);
             return rows;
         }
+
+
+        public async Task<int> Update(Guid tourId, Guid touristId, string columnCode, IValue value)
+        {
+            var columnId = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId && c.Code == columnCode).Select(c => c.Id).SingleAsync();
+            var cell = await dbContext.Set<CellDb>().Where(c => c.TouristId == touristId && c.ColumnId == columnId).SingleAsync();
+            switch (value.ValueType)
+            {
+                case Storage.Enums.ColumnValueType.Int:
+                    {
+                        var columnValue = (ColumnValue<int?>)value;
+                        cell.IntValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.String:
+                    {
+                        var columnValue = (ColumnValue<string>)value;
+                        cell.StringValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Decimal:
+                    {
+                        var columnValue = (ColumnValue<decimal?>)value;
+                        cell.DecimalValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.DateTime:
+                    {
+                        var columnValue = (ColumnValue<DateTime?>)value;
+                        cell.DateTimeValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Bool:
+                    {
+                        var columnValue = (ColumnValue<bool?>)value;
+                        cell.BoolValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Guid:
+                    {
+                        var columnValue = (ColumnValue<Guid?>)value;
+                        cell.GuidValue = columnValue.Value;
+                        break;
+                    }
+                default:
+                    throw new DataException("There is no such column value type");
+            }
+            return await dbContext.SaveChangesAsync();
+        }
+
 
         public void Delete(Guid id)
         {

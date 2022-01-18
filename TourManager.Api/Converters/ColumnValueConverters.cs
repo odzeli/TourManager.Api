@@ -11,7 +11,7 @@ namespace TourManager.Api.Converters
         public override IValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var jsonDoc = JsonDocument.ParseValue(ref reader);
-            var typeFromRequest = jsonDoc.RootElement.GetProperty("columnValueType").GetInt32();
+            var typeFromRequest = jsonDoc.RootElement.GetProperty("valueType").GetInt32();
             var enumType = (ColumnValueType)typeFromRequest;
             switch (enumType)
             {

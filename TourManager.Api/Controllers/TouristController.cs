@@ -52,8 +52,7 @@ namespace TourManager.Api.Controllers
             }
         }
 
-        [Route("{tourId}/TouristRows")]
-        [HttpGet]
+        [HttpGet, Route("{tourId}/TouristRows")]
         public async Task<IEnumerable<Row>> TouristsList(Guid tourId)
         {
             var touristRows = await touristManager.RowList(tourId);
@@ -61,5 +60,10 @@ namespace TourManager.Api.Controllers
             return touristRows;
         }
 
+        [HttpPost, Route("tour/{tourId}/tourist/{touristId}/column/{columnCode}")]
+        public async Task<int> Update(Guid tourId, Guid touristId, string columnCode, [FromBody] IValue value)
+        {
+            return await touristManager.Update(tourId, touristId, columnCode, value);
+        }
     }
 }
