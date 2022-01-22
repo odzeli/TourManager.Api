@@ -8,6 +8,5 @@ namespace TourManager.Storage.Enums
         None = 0,
         DisplayInPersonalPanel = 1,
         DisplayInGrid = 2,
-
     }
 }

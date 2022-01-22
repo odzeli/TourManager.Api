@@ -50,5 +50,19 @@ namespace TourManager.Domain.Logic
 
             return splittedColumns;
         }
+
+        public async Task<List<StandardColumn>> StandardColumns()
+        {
+            return await dbContext.Set<StandardColumn>().ToListAsync();
+        }
+
+        public async Task<int> CreateStandardColumn(StandardColumn standardColumn)
+        {
+            var all = await dbContext.Set<StandardColumn>().ToListAsync();
+            standardColumn.SortOrder = all.Count + 1;
+            await dbContext.Set<StandardColumn>().AddAsync(standardColumn);
+            return await dbContext.SaveChangesAsync();
+        }
+
     }
 }
