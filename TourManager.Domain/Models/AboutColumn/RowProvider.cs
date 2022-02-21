@@ -59,6 +59,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<string>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.StringValue;
                         return value;
                     }
@@ -67,6 +68,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<decimal?>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.DecimalValue;
                         return value;
                     }
@@ -75,6 +77,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<int?>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.IntValue;
                         return value;
                     }
@@ -83,6 +86,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<DateTime?>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.DateTimeValue;
                         return value;
                     }
@@ -91,6 +95,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<bool?>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.BoolValue;
                         return value;
                     }
@@ -99,6 +104,7 @@ namespace TourManager.Domain.Models.AboutColumn
                         var value = new ColumnValue<Guid?>();
                         value.ValueType = column.ValueType;
                         value.ColumnCode = column.Code;
+                        value.ColumnName = column.Name;
                         value.Value = cell.GuidValue;
                         return value;
                     }
