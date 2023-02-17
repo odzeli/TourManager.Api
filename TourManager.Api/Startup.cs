@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using TourManager.Api.Converters;
 using TourManager.Auth.Common;
 using TourManager.Domain;
@@ -52,24 +53,35 @@ namespace TourManager.Api
 
             services.AddDbContext<TourManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+            //var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.RequireHttpsMetadata = false; // should be true on the production
+            //        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,
+            //            ValidIssuer = authOptions.Issuer,
+
+            //            ValidateAudience = true,
+            //            ValidAudience = authOptions.Audience,
+
+            //            ValidateLifetime = true,
+
+            //            IssuerSigningKey = authOptions.GetSymmetricSecurityKey(), // HS256
+            //            ValidateIssuerSigningKey = true
+            //        };
+            //    });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, config =>
                 {
-                    options.RequireHttpsMetadata = false; // should be true on the production
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidIssuer = authOptions.Issuer,
-
-                        ValidateAudience = true,
-                        ValidAudience = authOptions.Audience,
-
-                        ValidateLifetime = true,
-
-                        IssuerSigningKey = authOptions.GetSymmetricSecurityKey(), // HS256
-                        ValidateIssuerSigningKey = true
+                        ClockSkew = TimeSpan.FromSeconds(5),
+                        ValidateAudience = false
                     };
+                    config.Authority = "https://localhost:44300";
+                    config.Audience = "https://localhost:44300";
                 });
 
             services.AddSwaggerGen(c =>
