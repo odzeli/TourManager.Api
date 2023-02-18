@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using TourManager.Api.Converters;
-using TourManager.Auth.Common;
 using TourManager.Domain;
 using TourManager.Storage;
 
