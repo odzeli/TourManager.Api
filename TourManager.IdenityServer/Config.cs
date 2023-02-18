@@ -25,13 +25,17 @@ namespace TourManager.IdenityServer
             new Client
             {
                 ClientId = "angular-client",
-                RequireClientSecret = false, 
+                RequireClientSecret = false,
                 RequireConsent = false,
                 AllowedGrantTypes = GrantTypes.Code,
                 RequirePkce = true,
                 //AllowAccessTokensViaBrowser = true,
                 //AccessTokenLifetime = 600,
                 AllowedCorsOrigins = { "http://localhost:4200" },
+
+                ClientSecrets = {
+                    new Secret("secret".Sha256())
+                },
 
                 RedirectUris = { "http://localhost:4200/signin-callback" },
                 //FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
