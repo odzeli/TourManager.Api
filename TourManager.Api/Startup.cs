@@ -79,8 +79,10 @@ namespace TourManager.Api
                         ClockSkew = TimeSpan.FromSeconds(5),
                         ValidateAudience = false
                     };
-                    config.Authority = "https://localhost:44300";
-                    config.Audience = "https://localhost:44300";
+                    //config.Authority = "https://localhost:44300";
+                    //config.Audience = "https://localhost:44300";
+                    config.Authority = "https://tourmngridentityserver.azurewebsites.net";
+                    config.Audience = "https://tourmngridentityserver.azurewebsites.net";
                 });
 
             services.AddSwaggerGen(c =>
