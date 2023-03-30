@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourManager.Api", "TourManager.Api\TourManager.Api.csproj", "{C3721479-CD6C-48E7-852E-ACE8577C82D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourManager.Api", "TourManager.Api\TourManager.Api.csproj", "{C3721479-CD6C-48E7-852E-ACE8577C82D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourManager.Domain", "TourManager.Domain\TourManager.Domain.csproj", "{E3B6B609-219E-4936-B875-90B4FBDC38A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourManager.Domain", "TourManager.Domain\TourManager.Domain.csproj", "{E3B6B609-219E-4936-B875-90B4FBDC38A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourManager.Storage", "TourManager.Storage\TourManager.Storage.csproj", "{0FCA9E0F-C067-4EC2-A4BF-49DEEAA6FE49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourManager.Storage", "TourManager.Storage\TourManager.Storage.csproj", "{0FCA9E0F-C067-4EC2-A4BF-49DEEAA6FE49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourManager.IdenityServer", "TourManager.IdenityServer\TourManager.IdenityServer.csproj", "{DD389A0A-4962-41DF-91A5-BF7EB7A80494}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0FCA9E0F-C067-4EC2-A4BF-49DEEAA6FE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FCA9E0F-C067-4EC2-A4BF-49DEEAA6FE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FCA9E0F-C067-4EC2-A4BF-49DEEAA6FE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD389A0A-4962-41DF-91A5-BF7EB7A80494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD389A0A-4962-41DF-91A5-BF7EB7A80494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD389A0A-4962-41DF-91A5-BF7EB7A80494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD389A0A-4962-41DF-91A5-BF7EB7A80494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

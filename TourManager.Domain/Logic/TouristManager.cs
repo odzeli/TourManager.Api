@@ -1,78 +1,149 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Models.Abstract;
+using TourManager.Domain.Models.AboutTourist;
 using TourManager.Storage;
-
-using Tourist = TourManager.Domain.Models.Tourist;
+using TourManager.Storage.Models;
+using Cell = TourManager.Domain.Models.AboutColumn.Cell;
+using CellDb = TourManager.Storage.Models.Cell;
+using Tourist = TourManager.Domain.Models.AboutTourist.Tourist;
+using TourManager.Domain.Models.AboutColumn;
+using ColumnDb = TourManager.Storage.Models.Column;
+using TouristDb = TourManager.Storage.Models.Tourist;
+using System.Data;
 
 namespace TourManager.Domain.Logic
 {
     public class TouristManager : BaseManager, ITouristManager
     {
-
-        public TouristManager(TourManagerDbContext dbContext)
+        private readonly IRowProvider rowProvider;
+        public TouristManager(TourManagerDbContext dbContext, IRowProvider rowProvider)
             : base(dbContext)
         {
-
+            this.rowProvider = rowProvider;
         }
-        public ITourist Get(Guid id)
+        public async Task<ITourist> Get(Guid id)
         {
-            var touristStorage = dbContext.Set<Storage.Models.Tourist>().Where(t => t.Id == id).SingleOrDefault();
+            var touristStorage = await dbContext.Set<TouristDb>().Where(t => t.Id == id).SingleOrDefaultAsync();
 
             var tourist = new Tourist()
             {
                 Name = touristStorage.Name,
-                Birthday = touristStorage.Birthday,
-                PassportNumber = touristStorage.PassportNumber,
-                ArrivalDateAndTime = touristStorage.ArrivalDateAndTime,
-                ArrivalTransportType = touristStorage.ArrivalTransportType,
-                DepartureDateAndTime = touristStorage.DepartureDateAndTime,
-                DepartureTransportType = touristStorage.DepartureTransportType,
-                TourDays = touristStorage.TourDays,
-                HotelNights = touristStorage.HotelNights,
-                Stars = touristStorage.Stars,
-                ApartmentType = touristStorage.ApartmentType,
-                PhoneNumber = touristStorage.PhoneNumber,
-                Hotel = touristStorage.Hotel,
-                ClosePrice = touristStorage.ClosePrice,
-                Addition = touristStorage.Addition,
-                Comment = touristStorage.Comment
+                TourId = touristStorage.TourId,
             };
             return tourist;
         }
 
-        public async Task<int> Set(ITourist tourist)
+        public async Task<int> Add(TouristValues touristValues)
         {
-            var touristStorage = new Storage.Models.Tourist()
+            using (var transaction = dbContext.Database.BeginTransaction())
             {
-                TourId = tourist.TourId,
-                Name = tourist.Name,
-                Birthday = tourist.Birthday,
-                PassportNumber = tourist.PassportNumber,
-                ArrivalDateAndTime = tourist.ArrivalDateAndTime,
-                ArrivalTransportType = tourist.ArrivalTransportType,
-                DepartureDateAndTime = tourist.DepartureDateAndTime,
-                DepartureTransportType = tourist.DepartureTransportType,
-                TourDays = tourist.TourDays,
-                HotelNights = tourist.HotelNights,
-                Stars = tourist.Stars,
-                ApartmentType = tourist.ApartmentType,
-                PhoneNumber = tourist.PhoneNumber,
-                Hotel = tourist.Hotel,
-                ClosePrice = tourist.ClosePrice,
-                Addition = tourist.Addition,
-                Comment = tourist.Comment
-            };
-            dbContext.Add(touristStorage);
+                try
+                {
+                    var tourColumns = await dbContext.Set<ColumnDb>().Where(c => c.TourId == touristValues.TourId).ToListAsync();
+                    var newTouristId = Guid.NewGuid();
+                    var newTourist = new TouristDb
+                    {
+                        Id = newTouristId,
+                        TourId = touristValues.TourId,
+                    };
+                    dbContext.Add(newTourist);
+                    await dbContext.SaveChangesAsync();
+
+                    touristValues.ColumnValues.ForEach(cv =>
+                    {
+                        var column = tourColumns.Where(tc => tc.Code == cv.ColumnCode).Single();
+                        var cell = new CellSetter(newTourist.Id, column.Id, column.ValueType);
+                        cell.SetValue(cv.Value);
+                        var cellDb = new CellDb()
+                        {
+                            TouristId = cell.TouristId,
+                            ColumnId = cell.ColumnId,
+                            StringValue = cell.StringValue,
+                            DecimalValue = cell.DecimalValue,
+                            IntValue = cell.IntValue,
+                            DateTimeValue = cell.DateTimeValue,
+                            BoolValue = cell.BoolValue,
+                            GuidValue = cell.GuidValue
+                        };
+                        dbContext.Add(cellDb);
+                    });
+
+                    var result = await dbContext.SaveChangesAsync();
+                    transaction.Commit();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public async Task<IEnumerable<Row>> RowList(Guid tourId)
+        {
+            var tourists = await dbContext.Set<TouristDb>().Where(t => t.TourId == tourId).Select(t => t.Id).ToListAsync();
+            var cells = await dbContext.Set<CellDb>().Where(c => tourists.Contains(c.TouristId)).ToListAsync();
+            var columnIdToColumnMap = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).ToDictionaryAsync(c => c.Id, c => c);
+            var rows = rowProvider.GenerateRows(cells, columnIdToColumnMap);
+            return rows;
+        }
+
+
+        public async Task<int> Update(Guid tourId, Guid touristId, string columnCode, IValue value)
+        {
+            var columnId = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId && c.Code == columnCode).Select(c => c.Id).SingleAsync();
+            var cell = await dbContext.Set<CellDb>().Where(c => c.TouristId == touristId && c.ColumnId == columnId).SingleAsync();
+            switch (value.ValueType)
+            {
+                case Storage.Enums.ColumnValueType.Int:
+                    {
+                        var columnValue = (ColumnValue<int?>)value;
+                        cell.IntValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.String:
+                    {
+                        var columnValue = (ColumnValue<string>)value;
+                        cell.StringValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Decimal:
+                    {
+                        var columnValue = (ColumnValue<decimal?>)value;
+                        cell.DecimalValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.DateTime:
+                    {
+                        var columnValue = (ColumnValue<DateTime?>)value;
+                        cell.DateTimeValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Bool:
+                    {
+                        var columnValue = (ColumnValue<bool?>)value;
+                        cell.BoolValue = columnValue.Value;
+                        break;
+                    }
+                case Storage.Enums.ColumnValueType.Guid:
+                    {
+                        var columnValue = (ColumnValue<Guid?>)value;
+                        cell.GuidValue = columnValue.Value;
+                        break;
+                    }
+                default:
+                    throw new DataException("There is no such column value type");
+            }
             return await dbContext.SaveChangesAsync();
         }
-        public void SetMany(List<Tourist> tourists)
-        {
-            throw new NotImplementedException();
-        }
+
+
         public void Delete(Guid id)
         {
             throw new NotImplementedException();

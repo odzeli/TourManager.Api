@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TourManager.Domain.Models;
+using TourManager.Domain.Models.AboutColumn;
+using TourManager.Domain.Models.AboutTourist;
 using TourManager.Domain.Models.Abstract;
 
 
@@ -9,9 +10,10 @@ namespace TourManager.Domain.Abstract
 {
     public interface ITouristManager
     {
-        public ITourist Get(Guid id);
-        public Task<int> Set(ITourist tourist);
-        public void SetMany(List<Tourist> tourists);
+        public Task<ITourist> Get(Guid id);
+        public Task<int> Add(TouristValues touristValues);
+        public Task<IEnumerable<Row>> RowList(Guid tourId);
+        public Task<int> Update(Guid tourId, Guid touristId, string columnCode, IValue value);
         public void Delete(Guid id);
     }
 }

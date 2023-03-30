@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
-using TourManager.Domain.Models;
+using ColumnDb = TourManager.Storage.Models.Column;
+using Tour = TourManager.Domain.Models.Tour;
 
 namespace TourManager.Api.Controllers
 {
+    [Authorize]
     [Route("api/Tour")]
     [ApiController]
-    public class TourController : Controller
+    public class TourController : ControllerBase
     {
         private readonly ITourManager tourManager;
 
@@ -16,9 +21,9 @@ namespace TourManager.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save([FromBody] Tour tour)
+        public async Task<IActionResult> Add([FromBody] Tour tour)
         {
-            var savingResult = tourManager.Save(tour);
+            var savingResult = await tourManager.Add(tour);
 
             if (savingResult < 1)
             {
@@ -27,6 +32,21 @@ namespace TourManager.Api.Controllers
             return Ok();
         }
 
-        
+        [HttpGet, Route("getTourStartDate/{tourId}")]
+        public async Task<ActionResult<DateTime>> GetTourStartDate(Guid tourId)
+        {
+            var startDate = await tourManager.GetTourStartDate(tourId);
+
+            return Ok(startDate);
+        }
+
+        [HttpGet, Route("getColumns/{tourId}")]
+        public async Task<ActionResult<ColumnDb>> GetColumns(Guid tourId)
+        {
+            var columns = await tourManager.GetColumns(tourId);
+
+            return Ok(columns);
+        }
+
     }
 }

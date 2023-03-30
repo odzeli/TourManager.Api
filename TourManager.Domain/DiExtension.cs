@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Logic;
+using TourManager.Domain.Models.AboutColumn;
 
 namespace TourManager.Domain
 {
@@ -10,6 +11,8 @@ namespace TourManager.Domain
         {
             services.AddScoped<ITouristManager, TouristManager>();
             services.AddScoped<ITourManager, Logic.TourManager>();
+            services.AddScoped<IColumnManager, ColumnManager>();
+            services.AddScoped<IRowProvider, RowProvider>();
         }
     }
 }

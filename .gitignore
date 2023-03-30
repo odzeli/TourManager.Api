@@ -1,0 +1,9 @@
+
+bin
+obj
+.vs
+/TourManager.Auth.Common/Properties/launchSettings.json
+/TourManager.Domain/Properties/launchSettings.json
+/TourManager.IdenityServer/keys/is-signing-key-DA3481EC99B69A93CB5CA748DCEA609B.json
+/TourManager.IdenityServer/Properties/launchSettings.json
+/TourManager.Storage/Properties/launchSettings.json
