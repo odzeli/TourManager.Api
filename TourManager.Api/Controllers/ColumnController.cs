@@ -33,9 +33,9 @@ namespace TourManager.Api.Controllers
         }
 
         [HttpPost, Route("standardColumn/create")]
-        public async Task<int> CreateStandardColumn([FromBody] StandardColumn standardColumn)
+        public async Task CreateStandardColumn([FromBody] StandardColumn standardColumn)
         {
-            return await columnManager.CreateStandardColumn(standardColumn);
+            await columnManager.CreateStandardColumn(standardColumn);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
@@ -56,12 +57,17 @@ namespace TourManager.Domain.Logic
             return await dbContext.Set<StandardColumn>().ToListAsync();
         }
 
-        public async Task<int> CreateStandardColumn(StandardColumn standardColumn)
+        public async Task CreateStandardColumn(StandardColumn standardColumn)
         {
+
+            var codeIsNotUnique = await dbContext.Set<StandardColumn>().AnyAsync(c => c.Code == standardColumn.Code);
+            if (codeIsNotUnique) throw new HttpListenerException(400, "Bad request. Such column code already exist.");
+
             var all = await dbContext.Set<StandardColumn>().ToListAsync();
             standardColumn.SortOrder = all.Count + 1;
             await dbContext.Set<StandardColumn>().AddAsync(standardColumn);
-            return await dbContext.SaveChangesAsync();
+
+            await dbContext.SaveChangesAsync();
         }
 
     }

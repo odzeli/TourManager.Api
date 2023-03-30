@@ -13,6 +13,6 @@ namespace TourManager.Domain.Abstract
         public Task<int> IncludeStandardColumnsToTour(Guid tourId);
         public Task<SplittedColumns> GetColumnsCode(Guid tourId);
         public Task<List<StandardColumn>> StandardColumns();
-        public Task<int> CreateStandardColumn(StandardColumn standardColumn);
+        public Task CreateStandardColumn(StandardColumn standardColumn);
     }
 }

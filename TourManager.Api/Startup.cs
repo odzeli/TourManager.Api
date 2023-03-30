@@ -17,13 +17,22 @@ namespace TourManager.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IWebHostEnvironment CurrentEnvironment { get; set; }
+        private IConfiguration Configuration { get; }
+
+
+
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            CurrentEnvironment = env;
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-        readonly string specificOrigins = "specificOrigin";
+        private readonly string localConnectionStringKey = "LocalConnection";
+        private readonly string prodConnectionStringKey = "ProdConnection";
+        private readonly string specificOrigins = "specificOrigin";
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -50,7 +59,12 @@ namespace TourManager.Api
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddDbContext<TourManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            if (CurrentEnvironment.IsDevelopment())
+                services.AddDbContext<TourManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(localConnectionStringKey)));
+            else
+                services.AddDbContext<TourManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString(prodConnectionStringKey)));
+
 
             //var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -79,10 +93,8 @@ namespace TourManager.Api
                         ClockSkew = TimeSpan.FromSeconds(5),
                         ValidateAudience = false
                     };
-                    //config.Authority = "https://localhost:44300";
-                    //config.Audience = "https://localhost:44300";
-                    config.Authority = "https://tourmngridentityserver.azurewebsites.net";
-                    config.Audience = "https://tourmngridentityserver.azurewebsites.net";
+                    config.Authority = "https://localhost:44300";
+                    config.Audience = "https://localhost:44300";
                 });
 
             services.AddSwaggerGen(c =>
