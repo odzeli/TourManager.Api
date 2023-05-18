@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using TourManager.Domain.Abstract;
-using ColumnDb = TourManager.Storage.Models.Column;
+using Microsoft.AspNetCore.Authorization;
 using Tour = TourManager.Domain.Models.Tour;
+using ColumnDb = TourManager.Storage.Models.Column;
+using TourManager.Domain.Models.TourExpense;
 
 namespace TourManager.Api.Controllers
 {
     [Authorize]
-    [Route("api/Tour")]
+    [Route("api/Tour/{tourId}")]
     [ApiController]
     public class TourController : ControllerBase
     {
@@ -20,27 +22,21 @@ namespace TourManager.Api.Controllers
             this.tourManager = tourManager;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Tour tour)
+        [HttpPost, Route("editMode/{editMode}")]
+        public Task TaskSaveTour([FromBody] Tour tour, bool editMode)
         {
-            var savingResult = await tourManager.Add(tour);
-
-            if (savingResult < 1)
-            {
-                return Conflict();
-            }
-            return Ok();
+            return tourManager.SaveTour(tour, editMode);
         }
 
-        [HttpGet, Route("getTourStartDate/{tourId}")]
-        public async Task<ActionResult<DateTime>> GetTourStartDate(Guid tourId)
+        [HttpGet, Route("tourMainInfo")]
+        public async Task<ActionResult<Tour>> TourMainInfo(Guid tourId)
         {
-            var startDate = await tourManager.GetTourStartDate(tourId);
+            var tour = await tourManager.TourMainInfo(tourId);
 
-            return Ok(startDate);
+            return Ok(tour);
         }
 
-        [HttpGet, Route("getColumns/{tourId}")]
+        [HttpGet, Route("getColumns")]
         public async Task<ActionResult<ColumnDb>> GetColumns(Guid tourId)
         {
             var columns = await tourManager.GetColumns(tourId);
@@ -48,5 +44,28 @@ namespace TourManager.Api.Controllers
             return Ok(columns);
         }
 
+        [HttpGet, Route("initialize-tour-editing")]
+        public Task<Tour> InitializeTourEditing(Guid tourId)
+        {
+            return tourManager.InitializeTourEditing(tourId);
+        }
+
+        [HttpDelete, Route("delete-tour")]
+        public Task DeleteTour(Guid tourId)
+        {
+            return tourManager.DeleteTour(tourId);
+        }
+
+        [HttpGet, Route("tour-expenses")]
+        public Task<List<TourExpenseGroup>> TourExpenses(Guid tourId)
+        {
+            return tourManager.TourExpenses(tourId);
+        }
+
+        [HttpGet, Route("save-tour-expenses")]
+        public Task SaveTourExpenses(Guid tourId, [FromBody]List<TourExpenseGroup> tourExpenses)
+        {
+            return tourManager.SaveTourExpenses(tourId, tourExpenses);
+        }
     }
 }

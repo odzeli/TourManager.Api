@@ -16,7 +16,8 @@ namespace TourManager.Domain.Models.AboutColumn
         {
             this.columns = columns;
             StringColumns = new List<string>();
-            NumberColumns = new List<string>();
+            IntegerColumns = new List<string>();
+            DecimalColumns = new List<string>();
             DateColumns = new List<string>();
             BoolColumns = new List<string>();
             GuidColumns = new List<string>();
@@ -28,8 +29,10 @@ namespace TourManager.Domain.Models.AboutColumn
                 switch (column.ValueType)
                 {
                     case ColumnValueType.Int:
+                        IntegerColumns.Add(column.Code);
+                        break;
                     case ColumnValueType.Decimal:
-                        NumberColumns.Add(column.Code);
+                        DecimalColumns.Add(column.Code);
                         break;
                     case ColumnValueType.String:
                         StringColumns.Add(column.Code);
