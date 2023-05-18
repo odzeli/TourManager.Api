@@ -2,6 +2,7 @@
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Logic;
 using TourManager.Domain.Models.AboutColumn;
+using TourManager.Domain.Models.Abstract;
 
 namespace TourManager.Domain
 {
@@ -13,6 +14,7 @@ namespace TourManager.Domain
             services.AddScoped<ITourManager, Logic.TourManager>();
             services.AddScoped<IColumnManager, ColumnManager>();
             services.AddScoped<IRowProvider, RowProvider>();
+            services.AddScoped<IImportManager, ImportManager>();
         }
     }
 }

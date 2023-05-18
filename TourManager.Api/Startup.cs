@@ -20,9 +20,6 @@ namespace TourManager.Api
         private IWebHostEnvironment CurrentEnvironment { get; set; }
         private IConfiguration Configuration { get; }
 
-
-
-
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             CurrentEnvironment = env;

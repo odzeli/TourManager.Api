@@ -32,7 +32,7 @@ namespace TourManager.Storage
             modelBuilder.Entity<Cell>().HasKey(c => new { c.ColumnId, c.TouristId });
             modelBuilder.Entity<Cell>().Property(t => t.DecimalValue).HasColumnType("decimal(18,4)");
 
-            modelBuilder.Entity<StandardColumn>().Property(sc => sc.Id).HasColumnName("StandardColumnId");
+            modelBuilder.Entity<StandardColumn>().Property(sc => sc.Id).HasColumnName("StandardColumnId").ValueGeneratedOnAdd();
 
             modelBuilder.Seed();
         }

@@ -1,10 +1,11 @@
-﻿using TourManager.Storage.Enums;
+﻿using System;
+using TourManager.Storage.Enums;
 
 namespace TourManager.Storage.Models
 {
     public class StandardColumn
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public ColumnValueType ValueType { get; set; }

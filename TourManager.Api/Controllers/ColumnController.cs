@@ -37,5 +37,6 @@ namespace TourManager.Api.Controllers
         {
             await columnManager.CreateStandardColumn(standardColumn);
         }
+
     }
 }

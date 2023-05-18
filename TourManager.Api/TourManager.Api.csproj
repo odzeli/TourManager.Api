@@ -28,4 +28,8 @@
     <ProjectReference Include="..\TourManager.Domain\TourManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\excel-tour-files\" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourManager.Domain.Abstract;
 using TourManager.Domain.Models.AboutColumn;
+using TourManager.Domain.Models.Abstract;
 using TourManager.Storage;
 using TourManager.Storage.Models;
 using ColumnDb = TourManager.Storage.Models.Column;
@@ -16,10 +17,14 @@ namespace TourManager.Domain.Logic
 {
     public class ColumnManager : BaseManager, IColumnManager
     {
-        public ColumnManager(TourManagerDbContext dbContext)
+        private readonly IImportManager importManager;
+        public ColumnManager(
+            TourManagerDbContext dbContext,
+            IImportManager importManager
+            )
             : base(dbContext)
         {
-
+            this.importManager = importManager;
         }
 
         public async Task<int> IncludeStandardColumnsToTour(Guid tourId)
@@ -45,7 +50,7 @@ namespace TourManager.Domain.Logic
 
         public async Task<SplittedColumns> GetColumnsCode(Guid tourId)
         {
-            var columnsFromDb = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).ToListAsync();
+            var columnsFromDb = await dbContext.Set<ColumnDb>().Where(c => c.TourId == tourId).OrderBy(c => c.SortOrder).ToListAsync();
             var splittedColumns = new SplittedColumnsSetter(columnsFromDb);
             splittedColumns.SplitColumns();
 

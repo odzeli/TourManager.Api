@@ -26,7 +26,11 @@ namespace TourManager.Api.Converters
                 case ColumnValueType.Decimal:
                     return JsonSerializer.Deserialize<ColumnValue<decimal?>>(jsonDoc.RootElement.ToString(), options);
                 case ColumnValueType.DateTime:
-                    return JsonSerializer.Deserialize<ColumnValue<DateTime?>>(jsonDoc.RootElement.ToString(), options);
+                    {
+                        var date = JsonSerializer.Deserialize<ColumnValue<DateTime?>>(jsonDoc.RootElement.ToString(), options);
+                        date.Value = Convert.ToDateTime(date.Value).ToLocalTime();
+                        return date;
+                    }
             }
             throw new NotSupportedException($"Type serialization failed with {enumType}. Its is not supported");
         }
